@@ -3,5 +3,110 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "cancel-http": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/cancel-http",
+      "sourceRoot": "projects/cancel-http/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/cancel-http",
+            "index": "projects/cancel-http/src/index.html",
+            "main": "projects/cancel-http/src/main.ts",
+            "polyfills": "projects/cancel-http/src/polyfills.ts",
+            "tsConfig": "projects/cancel-http/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/cancel-http/src/favicon.ico",
+              "projects/cancel-http/src/assets"
+            ],
+            "styles": [
+              "projects/cancel-http/src/styles.scss",
+              "node_modules/ng-devui/devui.min.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/cancel-http/src/environments/environment.ts",
+                  "with": "projects/cancel-http/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "cancel-http:build:production"
+            },
+            "development": {
+              "browserTarget": "cancel-http:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "cancel-http:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/cancel-http/src/test.ts",
+            "polyfills": "projects/cancel-http/src/polyfills.ts",
+            "tsConfig": "projects/cancel-http/tsconfig.spec.json",
+            "karmaConfig": "projects/cancel-http/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/cancel-http/src/favicon.ico",
+              "projects/cancel-http/src/assets"
+            ],
+            "styles": [
+              "projects/cancel-http/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "cancel-http"
 }
