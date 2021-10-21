@@ -31,8 +31,7 @@
               "projects/cancel-http/src/assets"
             ],
             "styles": [
-              "projects/cancel-http/src/styles.scss",
-              "node_modules/ng-devui/devui.min.css"
+              "projects/cancel-http/src/styles.scss"
             ],
             "scripts": []
           },
