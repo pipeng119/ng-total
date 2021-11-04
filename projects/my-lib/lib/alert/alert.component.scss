@@ -1,0 +1,153 @@
+:host {
+  display: block;
+}
+
+.devui-alert {
+  color: #000;
+  font-size: 16px;
+  border: 1px solid transparent;
+  padding: 8px 16px;
+  line-height: 24px;
+  border-radius: 2px;
+  word-break: normal;
+  word-wrap: break-word;
+
+  .devui-close {
+    color: #000;
+    opacity: 1;
+    line-height: 26px;
+    height: 24px;
+
+    &>svg path {
+      fill: #000;
+    }
+
+    span {
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+  &.devui-alert-success {
+    background-color: light-green;
+    border-color: green;
+    color: #000;
+
+    .devui-close {
+      &>svg path {
+        fill: green;
+      }
+    }
+  }
+
+  &.devui-alert-info {
+    background-color: yellow;
+    border-color: #000;
+    color: #000;
+
+    .devui-close {
+      &>svg path {
+        fill: #000;
+      }
+    }
+  }
+
+  &.devui-alert-warning {
+    background-color: red;
+    border-color: #000;
+    color: #000;
+
+    .devui-close {
+      &>svg path {
+        fill: #000;
+      }
+    }
+  }
+
+  &.devui-alert-danger {
+    background-color: red;
+    border-color: red;
+    color: #000;
+
+    .devui-close {
+      &>svg path {
+        fill: red;
+      }
+    }
+  }
+
+  &.devui-alert-simple {
+    border-color: #000;
+    color: #000;
+
+    .devui-close {
+      &>svg path {
+        fill: #000;
+      }
+    }
+  }
+
+  svg.devui-icon {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    transform: translateY(-1px); //字体14px图标16px对齐问题，微调
+  }
+
+  .devui-icon.devui-icon-success {
+    &>g {
+      path {
+        fill: green;
+      }
+
+      polygon {
+        fill: #000;
+        stroke: #000;
+      }
+    }
+  }
+
+  .devui-icon.devui-icon-warning {
+    &>g {
+      path.devui-icon-warning-outer {
+        fill: #000;
+      }
+
+      path.devui-icon-warning-inner {
+        fill: #000;
+        stroke: #000;
+      }
+    }
+  }
+
+  .devui-icon.devui-icon-info {
+    &>g {
+      path.devui-icon-info-outer {
+        fill: #000;
+      }
+
+      path.devui-icon-info-inner {
+        fill: #000;
+        stroke: #000;
+      }
+    }
+  }
+
+  .devui-icon.devui-icon-error {
+    &>g {
+      path.devui-icon-error-outer {
+        fill: red;
+      }
+
+      path.devui-icon-error-inner {
+        fill: #000;
+        stroke: #000;
+      }
+    }
+  }
+}
+
+.devui-alert-icon {
+  margin-right: 4px;
+}

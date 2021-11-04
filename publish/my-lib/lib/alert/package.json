@@ -1,0 +1,10 @@
+{
+  "main": "../../bundles/my-lib-lib-alert.umd.js",
+  "module": "../../fesm2015/my-lib-lib-alert.js",
+  "es2015": "../../fesm2015/my-lib-lib-alert.js",
+  "esm2015": "../../esm2015/lib/alert/my-lib-lib-alert.js",
+  "fesm2015": "../../fesm2015/my-lib-lib-alert.js",
+  "typings": "my-lib-lib-alert.d.ts",
+  "sideEffects": false,
+  "name": "my-lib/lib/alert"
+}

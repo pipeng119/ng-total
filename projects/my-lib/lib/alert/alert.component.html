@@ -1,0 +1,5 @@
+<div class="devui-alert devui-alert-{{type}}" *ngIf="!hid">
+  <button type="button" class="devui-close" (click)="close()" *ngIf="closeable"></button>
+  <span class="devui-alert-icon icon-{{type}}" *ngIf="showIcon">○</span>
+  <ng-content></ng-content>
+</div>

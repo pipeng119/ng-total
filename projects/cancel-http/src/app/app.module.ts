@@ -10,7 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpCancelInterceptor } from './http-cancel.interceptor';
 import { AdminComponent } from './admin/admin.component';
 import { ListComponent } from './list/list.component';
-
+import { MyLibModule } from 'whp-my-lib'
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +23,8 @@ import { ListComponent } from './list/list.component';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MyLibModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpCancelInterceptor, multi: true },
