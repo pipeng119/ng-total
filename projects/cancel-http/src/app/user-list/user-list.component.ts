@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AutoUnsubscribe } from '../AutoUnsubscribe';
+import { MsgService } from '../service/msg.service';
 
 @Component({
   selector: 'app-user-list',
@@ -17,6 +18,7 @@ export class UserListComponent implements OnInit {
 
   constructor(
     public userService: UserService,
+    private msgService: MsgService
     // private router: Router,
     // private httpCancelService: CancelHttpService
   ) {
@@ -25,6 +27,9 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+    this.msgService.getMsg().subscribe(res => {
+      console.log('res', res)
+    })
   }
 
   public getData(): void {

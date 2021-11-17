@@ -10,13 +10,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpCancelInterceptor } from './http-cancel.interceptor';
 import { AdminComponent } from './admin/admin.component';
 import { ListComponent } from './list/list.component';
-import { MyLibModule } from 'whp-my-lib'
+import { MyLibModule } from 'whp-my-lib';
+import { ChildComponent } from './child/child.component'
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
     AdminComponent,
-    ListComponent
+    ListComponent,
+    ChildComponent
   ],
   imports: [
     BrowserModule,
