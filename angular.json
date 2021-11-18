@@ -239,28 +239,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "inlineTemplate": true,
-          "inlineStyle": true,
-          "style": "scss",
-          "skipTests": true
-        },
-        "@schematics/angular:class": {
-          "skipTests": true
-        },
-        "@schematics/angular:directive": {
-          "skipTests": true
-        },
-        "@schematics/angular:guard": {
-          "skipTests": true
-        },
-        "@schematics/angular:interceptor": {
-          "skipTests": true
-        },
-        "@schematics/angular:pipe": {
-          "skipTests": true
-        },
-        "@schematics/angular:service": {
-          "skipTests": true
+          "style": "scss"
         },
         "@schematics/angular:application": {
           "strict": true
@@ -337,6 +316,24 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "workbook:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/workbook/src/test.ts",
+            "polyfills": "projects/workbook/src/polyfills.ts",
+            "tsConfig": "projects/workbook/tsconfig.spec.json",
+            "karmaConfig": "projects/workbook/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/workbook/src/favicon.ico",
+              "projects/workbook/src/assets"
+            ],
+            "styles": [
+              "projects/workbook/src/styles.scss"
+            ],
+            "scripts": []
           }
         }
       }

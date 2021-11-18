@@ -1,0 +1,7 @@
+<h1>测试各种ng的项目</h1>
+<nav>
+  <a *ngFor="let item of nav" [routerLink]="[ item.url ]">{{item.name}}</a>
+</nav>
+
+<hr>
+<router-outlet></router-outlet>
