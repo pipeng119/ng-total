@@ -37,8 +37,7 @@
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
+              "budgets": [{
                   "type": "initial",
                   "maximumWarning": "500kb",
                   "maximumError": "1mb"
@@ -49,12 +48,10 @@
                   "maximumError": "4kb"
                 }
               ],
-              "fileReplacements": [
-                {
-                  "replace": "projects/cancel-http/src/environments/environment.ts",
-                  "with": "projects/cancel-http/src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "projects/cancel-http/src/environments/environment.ts",
+                "with": "projects/cancel-http/src/environments/environment.prod.ts"
+              }],
               "outputHashing": "all"
             },
             "development": {
@@ -167,8 +164,7 @@
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
+              "budgets": [{
                   "type": "initial",
                   "maximumWarning": "500kb",
                   "maximumError": "1mb"
@@ -179,12 +175,10 @@
                   "maximumError": "4kb"
                 }
               ],
-              "fileReplacements": [
-                {
-                  "replace": "projects/rxjs-handle-error/src/environments/environment.ts",
-                  "with": "projects/rxjs-handle-error/src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "projects/rxjs-handle-error/src/environments/environment.ts",
+                "with": "projects/rxjs-handle-error/src/environments/environment.prod.ts"
+              }],
               "outputHashing": "all"
             },
             "development": {
@@ -263,14 +257,14 @@
               "projects/workbook/src/assets"
             ],
             "styles": [
-              "projects/workbook/src/styles.scss"
+              "projects/workbook/src/styles.scss",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
+              "budgets": [{
                   "type": "initial",
                   "maximumWarning": "500kb",
                   "maximumError": "1mb"
@@ -281,12 +275,10 @@
                   "maximumError": "4kb"
                 }
               ],
-              "fileReplacements": [
-                {
-                  "replace": "projects/workbook/src/environments/environment.ts",
-                  "with": "projects/workbook/src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "projects/workbook/src/environments/environment.ts",
+                "with": "projects/workbook/src/environments/environment.prod.ts"
+              }],
               "outputHashing": "all"
             },
             "development": {
@@ -334,6 +326,37 @@
               "projects/workbook/src/styles.scss"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "@ba/typography": {
+      "projectType": "library",
+      "root": "projects/ba/typography",
+      "sourceRoot": "projects/ba/typography/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ba/typography/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ba/typography/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ba/typography/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ba/typography/src/test.ts",
+            "tsConfig": "projects/ba/typography/tsconfig.spec.json",
+            "karmaConfig": "projects/ba/typography/karma.conf.js"
           }
         }
       }

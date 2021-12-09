@@ -1,1 +1,9 @@
+<p nz-typography nzCopyable nzEditable [(nzContent)]="copyStr">奥斯卡得奖发哈里斯接口返回</p>
+
 <p appCopy [copyTxt]='testStr' class="text">{{testStr}}</p>
+
+<p ba-typography>我是一段文本</p>
+
+<label for="clipboard-example-textarea">Text to be copied</label>
+<textarea id="clipboard-example-textarea" cols="30" rows="10" [(ngModel)]="value"></textarea>
+<button [cdkCopyToClipboard]="value">Copy to clipboard</button>

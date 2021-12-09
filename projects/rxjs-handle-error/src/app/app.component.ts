@@ -1,7 +1,8 @@
+import { TokenService } from './service/token.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
-import { of, throwError } from 'rxjs';
-import { catchError, finalize, map, retryWhen, shareReplay, tap } from 'rxjs/operators';
+import { BehaviorSubject, ConnectableObservable, from, interval, Observable, of, Subject, throwError, timer } from 'rxjs';
+import { catchError, filter, finalize, map, publish, retryWhen, share, shareReplay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +12,59 @@ import { catchError, finalize, map, retryWhen, shareReplay, tap } from 'rxjs/ope
 export class AppComponent {
   title = 'rxjs-handle-error';
 
-  @ViewChild('child',{static: true}) child: any
+  @ViewChild('child', { static: true }) child: any;
+
+
+
+  onChange(): Observable<any> {
+    return this.tokenService.change$;
+  }
+
+  public testTimer$!: Observable<number>;
 
   public data$ = this.http.get('http://localhost:8000/api/user')
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private tokenService: TokenService) {
   }
 
   ngOnInit(): void {
+    this.onChange().subscribe(res => console.log(res));
+    this.testHotOrCode();
     // this.easyHttp();
     // this.httpCatchError();
     // this.httpfinalize();
     // this.httpRetry();
-    console.log(this.child)
+    // this.testTimer$ = interval(1000);
+    // this.testTimer$.subscribe(num => console.log('first------->', num));
+
+    // setTimeout(() => {
+    //   this.testTimer$.subscribe(num => console.log('second------->', num));
+    // },2000)
+  }
+
+  public testHotOrCode(): void {
+    // let obs$ = from([1, 2, 3, 4, 5]).pipe(
+    //   publish()
+    // ) as ConnectableObservable<any>;
+    // obs$.connect();
+
+    // obs$.subscribe(data => { console.log("1st subscriber:" + data) });
+    // setTimeout(() => {
+    //   obs$.subscribe(data => { console.log("2st subscriber:" + data) });
+    // }, 2100);
+    // let obs$ = from([1, 2, 3, 4]).pipe(
+    //   share()
+    // )
+    // let obs$ = new Subject<boolean>();
+    let obs$ = new BehaviorSubject<boolean>(true);
+    let change$ = obs$.pipe(
+      filter(changed => changed),
+      map(() => '超哥YYDS'),
+      share()
+    );
+    change$.subscribe(data => { console.log("1st subscriber:" + data) });
+    change$.subscribe(data => { console.log("2st subscriber:" + data) });
+    obs$.next(true)
+
   }
 
   // 简易的http请求

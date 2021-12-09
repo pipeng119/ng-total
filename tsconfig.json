@@ -12,6 +12,10 @@
     "declaration": false,
     "downlevelIteration": true,
     "paths": {
+      "@ba/typography": [
+        "dist/ba/typography/ba-typography",
+        "dist/ba/typography"
+      ],
       "my-lib": [
         "projects/my-lib/index.ts",
       ],

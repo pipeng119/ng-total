@@ -4,6 +4,11 @@ import { CommonModule } from '@angular/common';
 import { TypographyRoutingModule } from './typography-routing.module';
 import { TypographyComponent } from './typography.component';
 import { CopyDirective } from '../directive/copy.directive';
+import {TypographyModule as TypographyLibModule} from '../../../../ba/typography/src/lib/typography.module'
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 
 @NgModule({
@@ -12,8 +17,13 @@ import { CopyDirective } from '../directive/copy.directive';
     CopyDirective
   ],
   imports: [
+    FormsModule,
     CommonModule,
-    TypographyRoutingModule
+    HttpClientModule,
+    NzTypographyModule,
+    TypographyRoutingModule,
+    TypographyLibModule,
+    ClipboardModule
   ]
 })
 export class TypographyModule { }
