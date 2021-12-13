@@ -1,6 +1,6 @@
-import { filter, take, concatAll } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
-import { from, iif, interval, Observable, of } from 'rxjs';
+import { filter, take, concatAll, combineLatest, mapTo, startWith, scan, bufferCount, bufferTime } from 'rxjs/operators';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { concat, empty, from, fromEvent, iif, interval, merge, Observable, of } from 'rxjs';
 
 
 @Component({
@@ -10,6 +10,9 @@ import { from, iif, interval, Observable, of } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   title = 'rxjs-learning';
+
+  @ViewChild('btn1', { static: true }) btn1!: ElementRef;
+  @ViewChild('btn2', { static: true }) btn2!: ElementRef;
 
   constructor() {
     const findIndex: any = (arr: any, predicate: any, start = 0) => {
@@ -26,7 +29,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.testTake();
+    // this.testBuffer();
   }
 
   testCreate() {
@@ -72,6 +75,40 @@ export class AppComponent implements OnInit {
 
     let example = source.pipe(concatAll());
     example.subscribe(console.log)
+  }
+
+  testConcat() {
+    let obs1: any = interval(1000).pipe(take(3));
+    let obs2 = of(3);
+    let obs3 = of(4, 5, 6);
+    const souce = concat(obs1, obs2, obs3);
+    souce.subscribe(console.log)
+  }
+
+  // combineLatest
+  testCombinelatest() {
+    let a: Object = {}
+  }
+
+  testScan() {
+    let addClick$ = fromEvent(this.btn1.nativeElement, 'click').pipe(mapTo(1));
+    let minusClick$ = fromEvent(this.btn2.nativeElement, 'click').pipe(mapTo(-1));
+
+    let obs = merge(addClick$, minusClick$)
+      .pipe(
+        startWith(0),
+        scan(
+          (origin, next) => origin + next
+        )
+      ).subscribe(res => {
+        console.log(res);
+      })
+  }
+
+  testBuffer() {
+    let obs1$ = interval(300);
+    let exmaple = obs1$.pipe(bufferTime(1000));
+    exmaple.subscribe(console.log)
   }
 
 }

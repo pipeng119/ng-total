@@ -3,11 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { DragDemoComponent } from './drag-demo/drag-demo.component';
+import { RunImgComponent } from './run-img/run-img.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DragDemoComponent
+    DragDemoComponent,
+    RunImgComponent
   ],
   imports: [
     BrowserModule

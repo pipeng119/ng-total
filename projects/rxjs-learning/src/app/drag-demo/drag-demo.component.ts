@@ -58,7 +58,6 @@ export class DragDemoComponent implements OnInit {
       }),
       concatAll(),
     ).subscribe((res: any) => {
-      console.log('res: ', res);
       this.dragEl.nativeElement!.style.left = res.x + 'px';
       this.dragEl.nativeElement!.style.top = res.y + 'px';
     })
