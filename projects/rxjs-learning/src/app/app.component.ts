@@ -21,6 +21,8 @@ import {
   delay,
   mergeAll,
   switchAll,
+  concatMap,
+  switchMap,
 } from 'rxjs/operators';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
@@ -48,10 +50,10 @@ export class AppComponent implements OnInit {
   @ViewChild('btn1', { static: true }) btn1!: ElementRef;
   @ViewChild('btn2', { static: true }) btn2!: ElementRef;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.testMergeAll();
+    this.testMergeMap();
   }
 
   // 仿造foreach
@@ -289,7 +291,7 @@ export class AppComponent implements OnInit {
       .pipe(
         map((x) => interval(1000)),
         take(3),
-        mergeAll()
+        concatAll()
       )
       .subscribe(console.log);
   }
@@ -309,5 +311,31 @@ export class AppComponent implements OnInit {
     const higherOrder = clicks.pipe(map((ev) => interval(1000).pipe(take(10))));
     const firstOrder = higherOrder.pipe(mergeAll(2));
     firstOrder.subscribe((x) => console.log(x));
+  }
+
+  testConcatMap() {
+    const clicks = fromEvent(document, 'click');
+    const source = clicks.pipe(
+      concatMap((event) => interval(1000).pipe(take(3)))
+    );
+    source.subscribe(console.log);
+  }
+
+  testSwitchMap() {
+    const click$ = fromEvent(document.getElementById('btn')!, 'click');
+    // const source = click$
+    //   .pipe(switchMap((event) => interval(1000).pipe(take(3))))
+    //   .subscribe(console.log);
+    click$
+      .pipe(switchMap((e) => this.http.get('http://localhost:8888/user')))
+      .subscribe(console.log);
+  }
+
+  testMergeMap() {
+    const click$ = fromEvent(document.getElementById('btn')!, 'click');
+    click$
+      // index可以限制最大并发数
+      .pipe(mergeMap((event) => this.http.get('http://localhost:8888/user'), 3))
+      .subscribe(console.log);
   }
 }
