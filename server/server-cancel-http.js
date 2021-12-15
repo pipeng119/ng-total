@@ -1,6 +1,10 @@
 const express = require('express');
+const bodyParser = require("body-parser");
 const app = express();
-
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({
+  extended: false
+});
 //设置跨域访问
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -24,7 +28,16 @@ const adminData = [{
 const list = [{
   name: '王五',
   age: 37
-}]
+}];
+const bookList = [{
+    id: 1,
+    name: '基督山伯爵'
+  },
+  {
+    id: 2,
+    name: '简爱'
+  }
+];
 
 
 
@@ -38,6 +51,15 @@ app.get('/admin', (req, res) => {
 
 app.get('/list', (req, res) => {
   setTimeout(() => res.send(list), 5000)
+})
+app.get('/bookList', (req, res) => {
+  res.send(bookList)
+})
+app.post('/book', jsonParser, (req, res) => {
+  const bookId = req.body.id;
+  res.send(bookList.find(({
+    id
+  }) => id === bookId))
 })
 
 //配置服务端口
