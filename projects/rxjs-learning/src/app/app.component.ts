@@ -23,6 +23,9 @@ import {
   switchAll,
   concatMap,
   switchMap,
+  window,
+  groupBy,
+  toArray,
 } from 'rxjs/operators';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
@@ -38,6 +41,7 @@ import {
   timer,
 } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { watch } from 'rxjs-watcher';
 
 @Component({
   selector: 'app-root',
@@ -49,11 +53,13 @@ export class AppComponent implements OnInit {
 
   @ViewChild('btn1', { static: true }) btn1!: ElementRef;
   @ViewChild('btn2', { static: true }) btn2!: ElementRef;
+  @ViewChild('btnWindow', { static: true }) btnWindow!: ElementRef;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.testMergeMap();
+    // this.testScan();
+    this.testSwitchMap();
   }
 
   // 仿造foreach
@@ -136,7 +142,8 @@ export class AppComponent implements OnInit {
     let obs = merge(addClick$, minusClick$)
       .pipe(
         startWith(0),
-        scan((origin, next) => origin + next)
+        scan((origin, next) => origin + next),
+        watch('testScan')
       )
       .subscribe((res) => {
         console.log(res);
@@ -337,5 +344,36 @@ export class AppComponent implements OnInit {
       // index可以限制最大并发数
       .pipe(mergeMap((event) => this.http.get('http://localhost:8888/user'), 3))
       .subscribe(console.log);
+  }
+
+  // 基于提供的值分成多个observable
+  /**
+   * 可能应用的方向:
+   * 求集合中符合某一种或多种特征的标的
+   * 核心就是分组
+   */
+  testGroupBy() {
+    // let source = interval(300).pipe(take(5));
+    // let exmaple = source.pipe(groupBy(x => x % 2));
+    // exmaple.subscribe(console.log)
+
+    const people = [
+      { name: 'Sue', age: 25 },
+      { name: 'Joe', age: 30 },
+      { name: 'Frank', age: 25 },
+      { name: 'Sarah', age: 35 },
+    ];
+
+    let source = from(people);
+    let result = source.pipe(
+      groupBy((person) => {
+        return person.age;
+      }),
+      mergeMap((group) => {
+        return group.pipe(toArray());
+      }),
+      watch('testRandomObs', 10)
+    );
+    result.subscribe(console.log);
   }
 }

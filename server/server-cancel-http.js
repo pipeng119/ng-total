@@ -68,5 +68,5 @@ app.post("/book", jsonParser, (req, res) => {
 
 //配置服务端口
 var server = app.listen(8888, () => {
-  console.log(`8000 port is listening~~~~~~~`);
+  console.log(`8888 port is listening~~~~~~~`);
 });

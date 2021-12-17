@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { DragDemoComponent } from './drag-demo/drag-demo.component';
 import { RunImgComponent } from './run-img/run-img.component';
 import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
+import { SubjectDemoComponent } from './subject-demo/subject-demo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DragDemoComponent,
     RunImgComponent,
-    AutoCompleteComponent
+    AutoCompleteComponent,
+    SubjectDemoComponent
   ],
   imports: [
     BrowserModule,
