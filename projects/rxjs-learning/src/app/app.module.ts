@@ -7,6 +7,8 @@ import { DragDemoComponent } from './drag-demo/drag-demo.component';
 import { RunImgComponent } from './run-img/run-img.component';
 import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
 import { SubjectDemoComponent } from './subject-demo/subject-demo.component';
+import { SimulateEffectComponent } from './simulate-effect/simulate-effect.component';
+import { DragDirective } from './drag.directive';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { SubjectDemoComponent } from './subject-demo/subject-demo.component';
     DragDemoComponent,
     RunImgComponent,
     AutoCompleteComponent,
-    SubjectDemoComponent
+    SubjectDemoComponent,
+    SimulateEffectComponent,
+    DragDirective
   ],
   imports: [
     BrowserModule,

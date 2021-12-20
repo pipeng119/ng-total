@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // this.testScan();
-    this.testSwitchMap();
+    // this.testSwitchMap();
   }
 
   // 仿造foreach

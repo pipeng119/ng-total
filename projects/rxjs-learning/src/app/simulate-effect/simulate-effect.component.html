@@ -1,0 +1,12 @@
+<h1>auto-complete by myself</h1>
+<div>
+  <input type="text" #search>
+  <ul class="list">
+    <li *ngFor="let item of list">
+      {{item}}
+    </li>
+  </ul>
+</div>
+<hr>
+
+<div id="drag" appDrag></div>
