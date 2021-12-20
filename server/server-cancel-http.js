@@ -61,6 +61,10 @@ app.get("/list", (req, res) => {
 app.get("/bookList", (req, res) => {
   res.send(bookList);
 });
+app.post("/books", jsonParser, (req, res) => {
+  console.log("req.body", req.body);
+  res.send(bookList);
+});
 app.post("/book", jsonParser, (req, res) => {
   const bookId = req.body.id;
   res.send(bookList.find(({ id }) => id === bookId));
