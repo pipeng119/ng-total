@@ -10,6 +10,12 @@ import {
   Subject,
   Subscription,
   timer,
+  Scheduler,
+  from,
+  asyncScheduler,
+  async,
+  queueScheduler,
+  asapScheduler,
 } from 'rxjs';
 import {
   multicast,
@@ -131,7 +137,9 @@ class MyObserver {
 
 class MyObservable {
   _subscribe;
-  constructor(subscribe: any) {
+  source!: any;
+  operator: any;
+  constructor(subscribe?: any) {
     if (subscribe) {
       this._subscribe = subscribe;
     }
@@ -139,9 +147,25 @@ class MyObservable {
 
   subscribe(...args: any) {
     const observer = new MyObserver(...arguments);
-    this._subscribe(observer);
+    if (this.operator) {
+      this.operator.call(observer, this.source);
+    } else {
+      this._subscribe(observer);
+    }
     return observer;
   }
+
+  // map(callback) {
+  //   // 创建新的obs
+  //   const observable = new MyObservable();
+  //   // 保存当前的数据源
+  //   observable.source = this;
+
+  //   observable.operator = {
+  //     call: (observer: any, source: any) => {},
+  //   };
+  //   return observable;
+  // }
 }
 
 function create(subscriber: {
@@ -190,7 +214,7 @@ let observableA = new MyObservable(function (observer: {
   observer.next('not work');
 });
 
-observableA.subscribe(observer);
+// observableA.subscribe(observer);
 
 @Component({
   selector: 'app-subject-demo',
@@ -201,7 +225,14 @@ export class SubjectDemoComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    // this.testSimulateObservable();
+    this.testScheduler();
+    console.log('ngOnInit');
+  }
+
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    console.log('ngAfterViewInit')
   }
 
   simulateSubject() {
@@ -423,5 +454,15 @@ export class SubjectDemoComponent implements OnInit {
     };
 
     observable.subscribe(observer);
+  }
+
+  testScheduler() {
+    console.log('before scheduler');
+    // from([1, 2, 3, 4], asyncScheduler).subscribe(console.log);
+    // from([5, 6, 7, 8], queueScheduler).subscribe(console.log);
+    // Promise.resolve(console.log(1))
+    setTimeout(() => console.log(1))
+    from([5, 6, 7, 8], asapScheduler).subscribe(console.log);
+    console.log('after scheduler');
   }
 }
