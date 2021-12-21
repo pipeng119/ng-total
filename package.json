@@ -6,6 +6,7 @@
     "start": "ng serve",
     "start:book": "ng serve --port 5217 --project workbook",
     "start:rxjs": "ng serve --port 5209 --project rxjs-learning",
+    "start:scss": "ng serve --port 5221 --project scss-learning",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
